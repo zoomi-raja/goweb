@@ -11,39 +11,44 @@ import (
 
 // SitemapIndex will be exported
 type SitemapIndex struct {
-	Locations []Location `xml:"sitemap"`
+	Locations []string `xml:"sitemap>loc"`
 }
 
-//Location peep peep
-type Location struct {
-	Loc string `xml:"loc"`
+//News is to parse
+type News struct {
+	Titles    []string `xml:"url>news>title"`
+	Keywords  []string `xml:"url>news>keywords"`
+	Locations []string `xml:"url>loc"`
 }
 
-func (L Location) String() string {
-	return fmt.Sprintf(L.Loc)
+type NewsMap struct {
+	Keyword  string
+	Location string
 }
 
 func parse() {
-	testHowReaderWork()
-	peep, k := true, 0
-	for peep {
-		k++
-		if k > 5 {
-			peep = false
-		}
-		fmt.Println("ji ")
-	}
+	var s SitemapIndex
+	var n News
+	newsMap := make(map[string]NewsMap)
 
 	resp, _ := http.Get("https://www.washingtonpost.com/news-sitemaps/index.xml")
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	/*stringBody := string(bytes)
 	fmt.Println(stringBody) */
 	resp.Body.Close()
-	var s SitemapIndex
 	xml.Unmarshal(bytes, &s)
 	for _, url := range s.Locations {
-		fmt.Println(url)
+		resp, err := http.Get(strings.TrimSpace(url))
+		if err != nil {
+			fmt.Println(err)
+		}
+		bytes, _ := ioutil.ReadAll(resp.Body)
+		xml.Unmarshal(bytes, &n)
+		for idx := range n.Keywords {
+			newsMap[n.Titles[idx]] = NewsMap{n.Keywords[idx], n.Locations[idx]}
+		}
 	}
+	fmt.Println(newsMap)
 }
 
 func testHowReaderWork() {
