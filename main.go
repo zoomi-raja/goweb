@@ -1,6 +1,7 @@
 package main
 
 func main() {
-	parse()
+	templateFunc()
+	//parse()
 	//refrence()
 }

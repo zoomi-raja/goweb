@@ -56,6 +56,6 @@ func testHowReaderWork() {
 	if s, err := ioutil.ReadAll(r); err != nil {
 		fmt.Println("issue in reading")
 	} else {
-		fmt.Fprintf(os.Stderr, "%s", s)
+		fmt.Fprintf(os.Stderr, "%s", s) //os.Stdout
 	}
 }
