@@ -1,7 +1,8 @@
 package main
 
 func main() {
-	templateFunc()
+	newsPage()
+	// templateFunc()
 	//parse()
 	//refrence()
 }

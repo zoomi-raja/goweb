@@ -9,6 +9,10 @@ import (
 	"strings"
 )
 
+var (
+	itration int
+)
+
 // SitemapIndex will be exported
 type SitemapIndex struct {
 	Locations []string `xml:"sitemap>loc"`
@@ -26,9 +30,25 @@ type NewsMap struct {
 	Location string
 }
 
-func parse() {
-	var s SitemapIndex
+func getNews(url string, length int, c chan News) {
 	var n News
+	resp, err := http.Get(strings.TrimSpace(url))
+	if err != nil {
+		fmt.Println(err)
+	}
+	bytes, _ := ioutil.ReadAll(resp.Body)
+	xml.Unmarshal(bytes, &n)
+	resp.Body.Close()
+	itration++
+	fmt.Println(itration)
+	c <- n
+	if itration == length {
+		close(c)
+	}
+}
+
+func parse() map[string]NewsMap {
+	var s SitemapIndex
 	newsMap := make(map[string]NewsMap)
 
 	resp, _ := http.Get("https://www.washingtonpost.com/news-sitemaps/index.xml")
@@ -37,18 +57,17 @@ func parse() {
 	fmt.Println(stringBody) */
 	resp.Body.Close()
 	xml.Unmarshal(bytes, &s)
-	for _, url := range s.Locations {
-		resp, err := http.Get(strings.TrimSpace(url))
-		if err != nil {
-			fmt.Println(err)
-		}
-		bytes, _ := ioutil.ReadAll(resp.Body)
-		xml.Unmarshal(bytes, &n)
-		for idx := range n.Keywords {
-			newsMap[n.Titles[idx]] = NewsMap{n.Keywords[idx], n.Locations[idx]}
+	chanelLength := len(s.Locations)
+	c := make(chan News, chanelLength)
+	for i := 0; i < chanelLength; i++ {
+		go getNews(s.Locations[i], chanelLength, c)
+	}
+	for ch := range c {
+		for idx, _ := range ch.Keywords {
+			newsMap[ch.Titles[idx]] = NewsMap{ch.Keywords[idx], ch.Locations[idx]}
 		}
 	}
-	fmt.Println(newsMap)
+	return newsMap
 }
 
 func testHowReaderWork() {
