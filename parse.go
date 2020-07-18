@@ -32,6 +32,7 @@ type NewsMap struct {
 
 func getNews(url string, length int, c chan News) {
 	var n News
+	itration++
 	resp, err := http.Get(strings.TrimSpace(url))
 	if err != nil {
 		fmt.Println(err)
@@ -39,7 +40,6 @@ func getNews(url string, length int, c chan News) {
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	xml.Unmarshal(bytes, &n)
 	resp.Body.Close()
-	itration++
 	fmt.Println(itration)
 	c <- n
 	if itration == length {
