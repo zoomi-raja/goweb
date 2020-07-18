@@ -19,7 +19,7 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 }
 func refrence() {
 	var handler myHandler
-	http.Handle("/handler", handler)
+	http.Handle("/handler", handler) //http.handlerfunc(handlerFunc)
 	http.HandleFunc("/", handlerFunc)
 	if err := http.ListenAndServe(":3000", nil); err != nil {
 		fmt.Println("error accured", err)
