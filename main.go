@@ -1,7 +1,13 @@
 package main
 
-func main() {
+import (
+	"gotut/api"
+	"gotut/config"
+)
 
+func main() {
+	config.Load()
+	api.Run()
 }
 
 /*var tpl *template.Template
