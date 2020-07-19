@@ -1,6 +1,7 @@
 package router
 
 import (
+	"gotut/api/middleware"
 	"gotut/api/router/routes"
 
 	"github.com/gorilla/mux"
@@ -10,6 +11,16 @@ import (
 func SetupRoutes(r *mux.Router) *mux.Router {
 	for _, route := range routes.Load() {
 		r.HandleFunc(route.Uri, route.Handler).Methods(route.Method)
+	}
+	return r
+}
+func SetupRoutesWithMiddlewares(r *mux.Router) *mux.Router {
+	for _, route := range routes.Load() {
+		r.HandleFunc(route.Uri,
+			middleware.SetMiddlewareLogger(
+				middleware.SetMiddlewareJSON(route.Handler),
+			),
+		).Methods(route.Method)
 	}
 	return r
 }
