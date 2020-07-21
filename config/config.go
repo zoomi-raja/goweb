@@ -15,12 +15,18 @@ var (
 	DBURL    = ""
 )
 
+func loadEnv() {
+	var err error
+	if value, _ := strconv.ParseBool(os.Getenv("DEBUGGER")); !value {
+		err = godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
+	}
+}
 func Load() {
 	var err error
-	err = godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	loadEnv()
 	PORT, err = strconv.Atoi(os.Getenv("API_PORT"))
 	if err != nil {
 		log.Println(err)
