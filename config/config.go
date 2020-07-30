@@ -20,6 +20,7 @@ func loadEnv() {
 	if value, _ := strconv.ParseBool(os.Getenv("DEBUGGER")); !value {
 		err = godotenv.Load()
 		if err != nil {
+			fmt.Println(err)
 			log.Fatal("Error loading .env file")
 		}
 	}
