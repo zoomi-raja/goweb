@@ -9,10 +9,10 @@ import (
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
 	post := models.Post{}
-	keys, ok := r.URL.Query()["limit"]
-	if ok {
-		fmt.Println(keys[0])
-	}
+	keys := r.URL.Query()
+	//	keys := r.FormValue("limit")
+	field := keys.Get("limit")
+	fmt.Println(field)
 	if posts, err := post.GetAll(); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 	} else {
