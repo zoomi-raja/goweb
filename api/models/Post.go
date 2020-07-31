@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"gotut/database"
 )
 
@@ -24,7 +23,6 @@ func (p Post) GetAll() ([]Post, error) {
 	for result.Next() {
 		var post Post
 		result.Scan(&post.ID, &post.Title, &post.Body, &post.CreatedAt)
-		fmt.Println(post)
 		posts = append(posts, post)
 	}
 	return posts, nil

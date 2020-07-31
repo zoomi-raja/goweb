@@ -11,4 +11,9 @@ var postsRoutes = []Route{
 		Method:  http.MethodGet,
 		Handler: controllers.GetPosts,
 	},
+	Route{
+		Uri:     "/posts",
+		Method:  http.MethodPost,
+		Handler: controllers.CreatePosts,
+	},
 }
