@@ -1,6 +1,7 @@
 package models
 
 import (
+	"gotut/api/utils"
 	"gotut/database"
 )
 
@@ -23,6 +24,8 @@ func (p Post) GetAll() ([]Post, error) {
 	for result.Next() {
 		var post Post
 		result.Scan(&post.ID, &post.Title, &post.Body, &post.CreatedAt)
+		dateTime, _ := utils.FormateDate(post.CreatedAt)
+		post.CreatedAt = dateTime
 		posts = append(posts, post)
 	}
 	return posts, nil
