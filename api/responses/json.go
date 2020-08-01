@@ -7,8 +7,12 @@ import (
 )
 
 func JSON(w http.ResponseWriter, statusCode int, data interface{}) {
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
-	err := json.NewEncoder(w).Encode(data)
+	err := json.NewEncoder(w).Encode(struct {
+		Status bool        `json:"status"`
+		Data   interface{} `json:"data"`
+	}{true, data})
 	if err != nil {
 		fmt.Fprintf(w, "%s", err.Error())
 	}
@@ -17,9 +21,10 @@ func JSON(w http.ResponseWriter, statusCode int, data interface{}) {
 func ERROR(w http.ResponseWriter, statusCode int, err error) {
 	if err != nil {
 		JSON(w, statusCode, struct {
-			Error string `json:"error"`
+			Status bool   `json:"status"`
+			Error  string `json:"error"`
 		}{
-			Error: err.Error(),
+			false, err.Error(),
 		})
 		return
 	}

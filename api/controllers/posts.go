@@ -22,4 +22,5 @@ func GetPosts(w http.ResponseWriter, r *http.Request) {
 
 func CreatePosts(w http.ResponseWriter, r *http.Request) {
 	// var post models.Post
+	fmt.Fprintln(w, "helllo")
 }
