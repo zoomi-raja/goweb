@@ -23,13 +23,22 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&user)
 	err := user.ValidateUserCreate()
 	if err.HasError() {
-		responses.ERRORARR(w, http.StatusInternalServerError, err)
+		responses.ERROR(w, http.StatusInternalServerError, err)
 		return
 	}
 	userModel := models.User{Email: user.Email, Username: user.Username, Password: user.Password}
-	if result, err := userModel.CreateUser(); err != nil {
-		responses.ERROR(w, http.StatusInternalServerError, err)
+	if userId, err := userModel.CreateUser(); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err) //*mysql.MySQLError error type
 	} else {
-		responses.JSON(w, http.StatusOK, result)
+		// os.Setenv("ACCESS_SECRET", "mywebblog")
+		token, err := userModel.CreatenToken()
+		if err != nil {
+			responses.ERROR(w, http.StatusInternalServerError, err)
+			return
+		}
+		responses.JSON(w, http.StatusOK, struct {
+			UserId int64  `json:"userID"`
+			Token  string `json:"token"`
+		}{userId, token})
 	}
 }

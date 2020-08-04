@@ -2,14 +2,16 @@ package models
 
 import (
 	"fmt"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/zoomi-raja/goweb/api/security"
 	"github.com/zoomi-raja/goweb/api/utils"
 	"github.com/zoomi-raja/goweb/database"
 )
 
 type User struct {
-	ID        uint32 `json:"id"`
+	ID        int64  `json:"id"`
 	Email     string `json:"email"`
 	Username  string `json:"username"`
 	Password  string `json:"password"`
@@ -19,6 +21,7 @@ type User struct {
 
 var userTable string = "users"
 
+// GetAllUsers will return all users with out showing password property
 func (u User) GetAllUsers() ([]User, error) {
 	users := make([]User, 0)
 	db, _ := database.Connect()
@@ -38,6 +41,7 @@ func (u User) GetAllUsers() ([]User, error) {
 	return users, nil
 }
 
+//CreateUser create user and will also hash the password
 func (u User) CreateUser() (int64, error) {
 	hashedPassword, err := security.Hash(u.Password)
 	if err != nil {
@@ -50,5 +54,18 @@ func (u User) CreateUser() (int64, error) {
 		return 0, err
 	}
 	id, _ := result.LastInsertId()
+	u.ID = id
 	return id, nil
+}
+
+func (u User) CreatenToken() (string, error) {
+	atClaims := jwt.MapClaims{}
+	atClaims["authorized"] = true
+	atClaims["user_id"] = u.ID
+	atClaims["name"] = u.Username
+	atClaims["email"] = u.Email
+	atClaims["avatar"] = u.Avatar
+	atClaims["exp"] = time.Now().Add(time.Minute * 15).Unix()
+	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
+	return at.SignedString([]byte("mywebblog")) //os.Getenv("ACCESS_SECRET")
 }

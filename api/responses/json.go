@@ -22,29 +22,22 @@ func JSON(w http.ResponseWriter, statusCode int, data interface{}) {
 
 func ERROR(w http.ResponseWriter, statusCode int, err error) {
 	if err != nil {
-		// fmt.Println(reflect.TypeOf(err))
-
+		errInfo := make(map[string]interface{})
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(statusCode)
+		switch errType := err.(type) {
+		case *utils.ErrorArr:
+			errs := err.(*utils.ErrorArr)
+			errInfo["ERR"] = errs.GetErros()
+			errInfo["TYPE"] = errType
+		default:
+			errInfo["ERR"] = err.Error()
+		}
 		json.NewEncoder(w).Encode(struct {
-			Status bool   `json:"status"`
-			Error  string `json:"error"`
+			Status bool        `json:"status"`
+			Error  interface{} `json:"error"`
 		}{
-			false, err.Error(),
-		})
-		return
-	}
-	JSON(w, http.StatusBadRequest, nil)
-}
-func ERRORARR(w http.ResponseWriter, statusCode int, errs utils.ErrorsArr) {
-	if errs != nil {
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(statusCode)
-		json.NewEncoder(w).Encode(struct {
-			Status bool                   `json:"status"`
-			Error  map[string]interface{} `json:"error"`
-		}{
-			false, errs.GetErros(),
+			false, errInfo["ERR"],
 		})
 		return
 	}
