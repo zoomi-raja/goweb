@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"gotut/api/utils"
 	"gotut/database"
 )
@@ -12,11 +13,13 @@ type Post struct {
 	CreatedAt string `json:"createdAt"`
 }
 
+var table string = "posts"
+
 func (p Post) GetAll() ([]Post, error) {
-	var posts []Post
+	posts := make([]Post, 0)
 	db, _ := database.Connect()
 	defer db.Close()
-	result, err := db.Query("SELECT id, title, body, createdAt FROM posts")
+	result, err := db.Query(fmt.Sprintf("SELECT id, title, body, created_at FROM %s", table))
 	if err != nil {
 		return nil, err
 	}

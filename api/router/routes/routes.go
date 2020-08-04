@@ -11,7 +11,7 @@ type Route struct {
 
 //Load all app urls here
 func Load() []Route {
-	routes := postsRoutes
+	routes := append(postsRoutes, usersRoutes...)
 	// append other route here to make one slice
 	return routes
 }
