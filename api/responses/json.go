@@ -3,8 +3,9 @@ package responses
 import (
 	"encoding/json"
 	"fmt"
-	"gotut/api/utils"
 	"net/http"
+
+	"github.com/zoomi-raja/goweb/api/utils"
 )
 
 func JSON(w http.ResponseWriter, statusCode int, data interface{}) {

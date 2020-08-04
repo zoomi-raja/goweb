@@ -2,9 +2,10 @@ package controllers
 
 import (
 	"fmt"
-	"gotut/api/models"
-	"gotut/api/responses"
 	"net/http"
+
+	"github.com/zoomi-raja/goweb/api/models"
+	"github.com/zoomi-raja/goweb/api/responses"
 )
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {

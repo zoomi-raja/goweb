@@ -2,10 +2,10 @@ package models
 
 import (
 	"fmt"
-	"gotut/api/utils"
-	"gotut/database"
 
-	"golang.org/x/crypto/bcrypt"
+	"github.com/zoomi-raja/goweb/api/security"
+	"github.com/zoomi-raja/goweb/api/utils"
+	"github.com/zoomi-raja/goweb/database"
 )
 
 type User struct {
@@ -39,13 +39,12 @@ func (u User) GetAllUsers() ([]User, error) {
 }
 
 func (u User) CreateUser() (int64, error) {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(u.Password), 8)
+	hashedPassword, err := security.Hash(u.Password)
 	if err != nil {
 		return 0, err
 	}
 	db, _ := database.Connect()
 	defer db.Close()
-	// result, err := db.Query(fmt.Sprintf("insert into %s (email, user_name, password) values (%s,%s,%s)", userTable, u.Email, u.Username, hashedPassword))
 	result, err := db.Exec(fmt.Sprintf("insert into %s (email, user_name, password) values (?,?,?)", userTable), u.Email, u.Username, hashedPassword)
 	if err != nil {
 		return 0, err

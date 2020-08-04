@@ -2,8 +2,9 @@ package models
 
 import (
 	"fmt"
-	"gotut/api/utils"
-	"gotut/database"
+
+	"github.com/zoomi-raja/goweb/api/utils"
+	"github.com/zoomi-raja/goweb/database"
 )
 
 type Post struct {

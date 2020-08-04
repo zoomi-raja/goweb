@@ -2,10 +2,11 @@ package api
 
 import (
 	"fmt"
-	"gotut/api/router"
-	"gotut/config"
 	"log"
 	"net/http"
+
+	"github.com/zoomi-raja/goweb/api/router"
+	"github.com/zoomi-raja/goweb/config"
 )
 
 func Run() {

@@ -2,8 +2,9 @@ package controllers
 
 import (
 	"errors"
-	"gotut/api/responses"
 	"net/http"
+
+	"github.com/zoomi-raja/goweb/api/responses"
 )
 
 func NotFound(w http.ResponseWriter, r *http.Request) {

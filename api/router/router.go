@@ -1,10 +1,11 @@
 package router
 
 import (
-	"gotut/api/controllers"
-	"gotut/api/middleware"
-	"gotut/api/router/routes"
 	"net/http"
+
+	"github.com/zoomi-raja/goweb/api/controllers"
+	"github.com/zoomi-raja/goweb/api/middleware"
+	"github.com/zoomi-raja/goweb/api/router/routes"
 
 	"github.com/gorilla/mux"
 )

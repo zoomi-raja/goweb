@@ -1,7 +1,7 @@
 package requests
 
 import (
-	"gotut/api/utils"
+	"github.com/zoomi-raja/goweb/api/utils"
 )
 
 type User struct {

@@ -1,8 +1,9 @@
 package routes
 
 import (
-	"gotut/api/controllers"
 	"net/http"
+
+	"github.com/zoomi-raja/goweb/api/controllers"
 )
 
 var usersRoutes = []Route{

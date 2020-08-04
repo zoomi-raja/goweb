@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gotut/api"
-	"gotut/config"
+	"github.com/zoomi-raja/goweb/api"
+	"github.com/zoomi-raja/goweb/config"
 )
 
 func main() {

@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
-	"gotut/api/models"
-	"gotut/api/requests"
-	"gotut/api/responses"
 	"net/http"
+
+	"github.com/zoomi-raja/goweb/api/models"
+	"github.com/zoomi-raja/goweb/api/requests"
+	"github.com/zoomi-raja/goweb/api/responses"
 )
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {

@@ -1,8 +1,7 @@
 CREATE TABLE `goDatabase`.`users`
 (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR
-(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL UNIQUE,
   `user_name` VARCHAR
 (45) NOT NULL,
   `password` VARCHAR

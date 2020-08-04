@@ -2,7 +2,8 @@ package database
 
 import (
 	"database/sql"
-	"gotut/config"
+
+	"github.com/zoomi-raja/goweb/config"
 
 	_ "github.com/go-sql-driver/mysql"
 )
