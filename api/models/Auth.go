@@ -10,6 +10,12 @@ import (
 	"github.com/zoomi-raja/goweb/database"
 )
 
+type AuthCTX string
+
+func (a AuthCTX) String() string {
+	return string(a)
+}
+
 type Auth struct {
 	ID       int64  `json:"id"`
 	Email    string `json:"email"`
@@ -73,4 +79,25 @@ func (a Auth) CreatenToken() (UserToken, error) {
 		return UserToken{}, err
 	}
 	return UserToken{token, atClaims["exp"].(int64)}, nil //os.Getenv("ACCESS_SECRET")
+}
+
+func (a Auth) VerifyToken(token string) (jwt.MapClaims, error) {
+	atClaims := jwt.MapClaims{}
+	if token == "" {
+		return atClaims, errors.New("Invalid token")
+	}
+	tkn, err := jwt.ParseWithClaims(token, atClaims, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte("mywebblog"), nil
+	})
+	if err != nil {
+		return atClaims, err //jwt.ErrSignatureInvalid
+
+	}
+	if !tkn.Valid {
+		return atClaims, errors.New("Invalid token")
+	}
+	return atClaims, nil
 }
