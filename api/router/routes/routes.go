@@ -9,9 +9,11 @@ type Route struct {
 	Handler func(http.ResponseWriter, *http.Request)
 }
 
+var routes []Route
+
 //Load all app urls here
 func Load() []Route {
-	routes := append(postsRoutes, usersRoutes...)
+	// routes := append(postsRoutes, usersRoutes...)
 	// append other route here to make one slice
 	return routes
 }

@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -42,6 +43,23 @@ func (u User) GetAllUsers() ([]User, error) {
 	return users, nil
 }
 
+func (u User) GetUser() (User, error) {
+	user := User{}
+
+	if u.Email == "" {
+		return user, errors.New("email missing for query")
+	}
+	db, _ := database.Connect()
+	defer db.Close()
+	row := db.QueryRow(`SELECT id, email, user_name, ifnull(avatar, ''), created_at,password FROM users WHERE email = ?`, u.Email)
+	if err := row.Scan(&user.ID, &user.Email, &user.Username, &user.Avatar, &user.CreatedAt, &user.Password); err != nil {
+		return user, err
+	}
+	dateTime, _ := utils.FormateDate(user.CreatedAt)
+	user.CreatedAt = dateTime
+	return user, nil
+}
+
 //CreateUser create user and will also hash the password
 func (u User) CreateUser() (int64, error) {
 	hashedPassword, err := security.Hash(u.Password)
@@ -61,7 +79,12 @@ func (u User) CreateUser() (int64, error) {
 	return id, nil
 }
 
-func (u User) CreatenToken() (string, error) {
+type UserToken struct {
+	Token   string
+	ExpTime int64
+}
+
+func (u User) CreatenToken() (UserToken, error) {
 	atClaims := jwt.MapClaims{}
 	atClaims["authorized"] = true
 	atClaims["user_id"] = u.ID
@@ -70,5 +93,9 @@ func (u User) CreatenToken() (string, error) {
 	atClaims["avatar"] = u.Avatar
 	atClaims["exp"] = time.Now().Add(time.Minute * 15).Unix()
 	at := jwt.NewWithClaims(jwt.SigningMethodHS256, atClaims)
-	return at.SignedString([]byte("mywebblog")) //os.Getenv("ACCESS_SECRET")
+	token, err := at.SignedString([]byte("mywebblog"))
+	if err != nil {
+		return UserToken{}, err
+	}
+	return UserToken{token, atClaims["exp"].(int64)}, nil //os.Getenv("ACCESS_SECRET")
 }

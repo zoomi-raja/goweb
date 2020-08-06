@@ -2,14 +2,22 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
+	"github.com/zoomi-raja/goweb/api/cookies"
 	"github.com/zoomi-raja/goweb/api/models"
 	"github.com/zoomi-raja/goweb/api/requests"
 	"github.com/zoomi-raja/goweb/api/responses"
 )
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
+	if c, err := r.Cookie("token"); err != nil {
+		fmt.Println("no such cookies")
+	} else {
+		fmt.Println("Cookie found :", c)
+	}
+
 	user := models.User{}
 	if users, err := user.GetAllUsers(); err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
@@ -36,9 +44,11 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 			responses.ERROR(w, http.StatusInternalServerError, err)
 			return
 		}
+		//set auth info in cookie
+		cookies.SetAuthCookie(w, token)
 		responses.JSON(w, http.StatusOK, struct {
 			UserId int64  `json:"userID"`
 			Token  string `json:"token"`
-		}{userId, token})
+		}{userId, token.Token})
 	}
 }

@@ -28,7 +28,7 @@ func (u User) ValidateUserCreate() utils.ErrorsArr {
 	if len(u.Username) < 2 || len(u.Username) > 40 {
 		errArr.AddError("name", "The name field must be between 2-40 chars!")
 	}
-	// check if the name empty
+	// check if the password empty
 	if u.Password == "" {
 		errArr.AddError("password", "Password is required!")
 	} else if len(u.Password) < 6 || len(u.Password) > 40 {
