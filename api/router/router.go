@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/zoomi-raja/goweb/api/controllers"
-	"github.com/zoomi-raja/goweb/api/middleware"
 	"github.com/zoomi-raja/goweb/api/router/routes"
 
 	"github.com/gorilla/mux"
@@ -16,16 +15,6 @@ func SetupRoutes(r *mux.Router) *mux.Router {
 		r.HandleFunc(route.Uri, route.Handler).Methods(route.Method)
 	}
 	r.NotFoundHandler = http.HandlerFunc(controllers.NotFound)
-	return r
-}
-func SetupRoutesWithMiddlewares(r *mux.Router) *mux.Router {
-	for _, route := range routes.Load() {
-		r.HandleFunc(route.Uri,
-			middleware.SetMiddlewareLogger(
-				middleware.SetMiddlewareJSON(route.Handler),
-			),
-		).Methods(route.Method)
-	}
 	return r
 }
 

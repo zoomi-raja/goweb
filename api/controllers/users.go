@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/zoomi-raja/goweb/api/cookies"
@@ -12,11 +11,6 @@ import (
 )
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
-	if c, err := r.Cookie("token"); err != nil {
-		fmt.Println("no such cookies")
-	} else {
-		fmt.Println("Cookie found :", c)
-	}
 
 	user := models.User{}
 	if users, err := user.GetAllUsers(); err != nil {

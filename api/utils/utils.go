@@ -2,6 +2,8 @@ package utils
 
 import (
 	"fmt"
+	"reflect"
+	"runtime"
 	"time"
 )
 
@@ -15,4 +17,8 @@ func FormateDate(date string) (string, error) {
 	} else {
 		return t.Format(layoutBlog), nil
 	}
+}
+
+func GetFunctionName(i interface{}) string {
+	return runtime.FuncForPC(reflect.ValueOf(i).Pointer()).Name()
 }
