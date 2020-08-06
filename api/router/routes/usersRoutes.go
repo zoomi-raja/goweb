@@ -19,11 +19,6 @@ func init() {
 			Method:  http.MethodGet,
 			Handler: middleware.Addmiddlewares(controllers.GetUsers, middlewares),
 		},
-		Route{
-			Uri:     "/users",
-			Method:  http.MethodPost,
-			Handler: controllers.CreateUser,
-		},
 	}
 	routes = append(routes, uRoutes...)
 }

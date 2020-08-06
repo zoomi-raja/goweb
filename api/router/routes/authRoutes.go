@@ -13,6 +13,11 @@ func init() {
 			Method:  http.MethodPost,
 			Handler: controllers.Login,
 		},
+		Route{
+			Uri:     "/logup",
+			Method:  http.MethodPost,
+			Handler: controllers.CreateUser,
+		},
 	}
 	routes = append(routes, aRoutes...)
 }

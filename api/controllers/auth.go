@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/zoomi-raja/goweb/api/cookies"
 	"github.com/zoomi-raja/goweb/api/security"
@@ -22,8 +23,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
-	userModel := models.User{Email: req.Email, Password: req.Password}
-	if user, err := userModel.GetUser(); err != nil {
+	authModel := models.Auth{Email: req.Email, Password: req.Password}
+	if user, err := authModel.GetUser(); err != nil {
 		switch err {
 		case sql.ErrNoRows:
 			responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("Username or password is invalid"))
@@ -40,10 +41,41 @@ func Login(w http.ResponseWriter, r *http.Request) {
 				responses.ERROR(w, http.StatusInternalServerError, err)
 				return
 			}
-			user.Password = ""
+			userData := map[string]string{
+				"id":       strconv.FormatInt(user.ID, 10),
+				"username": user.Username,
+				"email":    user.Email,
+				"avatar":   user.Avatar,
+			}
 			//set auth info in cookie
 			cookies.SetAuthCookie(w, token)
-			responses.JSON(w, http.StatusOK, user)
+			responses.JSON(w, http.StatusOK, userData)
 		}
+	}
+}
+
+func CreateUser(w http.ResponseWriter, r *http.Request) {
+	user := requests.User{}
+	json.NewDecoder(r.Body).Decode(&user)
+	err := user.ValidateUserCreate()
+	if err.HasError() {
+		responses.ERROR(w, http.StatusUnprocessableEntity, err)
+		return
+	}
+	authModel := models.Auth{Email: user.Email, Username: user.Username, Password: user.Password}
+	if userId, err := authModel.CreateUser(); err != nil {
+		responses.ERROR(w, http.StatusInternalServerError, err) //*mysql.MySQLError error type
+	} else {
+		token, err := authModel.CreatenToken()
+		if err != nil {
+			responses.ERROR(w, http.StatusInternalServerError, err)
+			return
+		}
+		//set auth info in cookie
+		cookies.SetAuthCookie(w, token)
+		responses.JSON(w, http.StatusOK, struct {
+			UserId int64  `json:"userID"`
+			Token  string `json:"token"`
+		}{userId, token.Token})
 	}
 }
