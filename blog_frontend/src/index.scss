@@ -4,6 +4,7 @@
 	--main-color: #fff;
 	--utiliy-ycolor: #ffbc00;
 	--utiliy-bcolor: #61dafb;
+	--utiliy-gcolor: #333;
 
 	--text-main-color: #333;
 	--text-secondary-dark: #777;
@@ -71,7 +72,14 @@ h2 {
 	border-radius: 5px;
 	font-size: 1.6rem;
 }
-
+.text-ac {
+	text-align: center;
+}
+.text-ul {
+	border-bottom: 0.3rem solid var(--utiliy-ycolor);
+	display: inline;
+	padding-bottom: 0.5rem;
+}
 .bottom-line {
 	height: 2px;
 	width: 50%;
@@ -105,9 +113,16 @@ h2 {
 .ml-1 {
 	margin-left: 1rem;
 }
+.mb-1 {
+	margin-bottom: 1rem;
+}
 .mb-2 {
 	margin-bottom: 2rem;
 }
 .mb-3 {
 	margin-bottom: 3rem;
+}
+
+.paragraph {
+	line-height: 3.2rem;
 }
