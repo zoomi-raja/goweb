@@ -1,0 +1,61 @@
+.btn,
+.btn:link,
+.btn:visited {
+	font-size: 1.6rem;
+	padding: 1.4rem 3rem;
+	border-radius: 10rem;
+	text-transform: uppercase;
+	display: inline-block;
+	text-decoration: none;
+	-webkit-transition: all 0.4s;
+	transition: all 0.4s;
+	font-weight: 400;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+.btn:not(:disabled):hover {
+	-webkit-transform: translateY(-1px);
+	transform: translateY(-1px);
+	-webkit-box-shadow: 0 0.3rem 0.9rem rgba(0, 0, 0, 0.35);
+	box-shadow: 0 0.3rem 0.9rem rgba(0, 0, 0, 0.35);
+}
+.btn:active {
+	transform: translateY(-1px) !important;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2) !important;
+}
+.btn--small {
+	padding: 1.25rem 3rem !important;
+	font-size: 1.4rem !important;
+}
+.btn--large {
+	width: 100%;
+}
+.btn--primary {
+	background-color: var(--utiliy-bcolor);
+	color: var(--text-main-color);
+}
+.btn--secondary {
+	background-color: var(--utiliy-ycolor);
+	color: var(--text-main-color);
+}
+
+.btn--danger {
+	color: #944317;
+	color: #fff;
+}
+.btn:disabled {
+	color: #ccc;
+	cursor: not-allowed;
+	animation: shimmer 2s infinite linear;
+	background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+	background-size: 1000px 100%;
+}
+@keyframes shimmer {
+	0% {
+		background-position: -1000px 0;
+	}
+	100% {
+		background-position: 1000px 0;
+	}
+}
