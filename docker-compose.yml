@@ -2,11 +2,12 @@ version: "2"
 services:
   blog_api:
     image: blog_api
-    build: .
+    container_name: blog_api
+    build: ./blog_api
     ports:
       - 80:8000
     volumes:
-      - ./:/app
+      - ./blog_api/:/app
     environment:
       - API_PORT=8000
   db:
