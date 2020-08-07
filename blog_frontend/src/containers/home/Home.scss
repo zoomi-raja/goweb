@@ -1,0 +1,9 @@
+.section {
+	margin: 2rem 0;
+	& > div:not(:last-child) {
+		margin-bottom: 2rem;
+	}
+}
+.Typewriter {
+	display: inline-block;
+}

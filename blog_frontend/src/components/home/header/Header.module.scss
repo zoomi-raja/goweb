@@ -1,0 +1,53 @@
+.header {
+	margin: 0 auto;
+	padding: 2rem;
+	width: 50%;
+	display: flex;
+	.imgHolder {
+		flex-basis: 32%;
+		img {
+			border-radius: 5px;
+		}
+	}
+	.infoHolder {
+		margin-left: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		.infoPersonal {
+			font-size: 2rem;
+			font-weight: 500;
+		}
+		.contact {
+			.contact_item {
+				margin-top: 1rem;
+				&:last-child {
+					margin-bottom: 1rem;
+				}
+				svg {
+					margin-right: 2rem;
+					vertical-align: middle;
+					fill: currentColor;
+					color: var(--text-secondary-dark);
+				}
+			}
+		}
+		.socialIcons {
+			a {
+				&:not(:first-child) {
+					margin-left: 2rem;
+				}
+				svg {
+					color: var(--utiliy-bcolor);
+					width: 3.4rem;
+					height: 3.4rem;
+					border-radius: 50%;
+					fill: currentColor;
+					path {
+						background-color: #fff;
+					}
+				}
+			}
+		}
+	}
+}
