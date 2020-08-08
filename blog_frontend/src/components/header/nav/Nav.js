@@ -4,12 +4,12 @@ import { Link } from "react-scroll";
 const Nav = () => {
 	return (
 		<ul className={classes.main_nav}>
-			<li>
+			<li className="navItem">
 				<Link to="intro" spy={true} smooth={true} duration={300} offset={-60}>
 					Introduction
 				</Link>
 			</li>
-			<li>
+			<li className="navItem">
 				<Link
 					to="interests"
 					spy={true}
@@ -20,7 +20,7 @@ const Nav = () => {
 					Intrests
 				</Link>
 			</li>
-			<li>
+			<li className="navItem">
 				<Link
 					to="motivation"
 					spy={true}
@@ -31,7 +31,7 @@ const Nav = () => {
 					Motivation
 				</Link>
 			</li>
-			<li>
+			<li className="navItem">
 				<Link
 					to="articles"
 					spy={true}

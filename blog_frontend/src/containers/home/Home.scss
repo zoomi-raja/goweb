@@ -8,7 +8,7 @@
 	display: inline-block;
 }
 
-a {
+.navItem a {
 	cursor: pointer;
 	&.active {
 		border-bottom: 0.2rem solid var(--utiliy-ycolor);
