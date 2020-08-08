@@ -1,7 +1,15 @@
 .header {
+	&.sticky {
+		padding: 1rem 2rem;
+	}
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	transition: all ease 0.2s;
+	box-shadow: 0 0.001rem 0.5rem rgba(0, 0, 0, 0.09);
 	.nav_holder {
 		position: relative;
 		.logo {

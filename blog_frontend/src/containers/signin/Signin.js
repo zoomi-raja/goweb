@@ -5,7 +5,7 @@ const onClick = () => {
 };
 const Signin = () => {
 	return (
-		<Button clicked={onClick} btnType="btn--primary">
+		<Button clicked={onClick} btnType="btn--primary" btnSize="btn--small">
 			Sign in
 		</Button>
 	);
