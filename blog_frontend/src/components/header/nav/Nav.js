@@ -13,9 +13,6 @@ const Nav = () => {
 				<a href="#">Motivation</a>
 			</li>
 			<li>
-				<a href="#">Portfolio</a>
-			</li>
-			<li>
 				<a href="#">Articles</a>
 			</li>
 		</ul>

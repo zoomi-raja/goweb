@@ -21,6 +21,8 @@ const Interests = () => {
 		"API",
 		"JSON",
 		"Ecommerce",
+		"Socket.io",
+		"webRTC",
 		"Microservices",
 		"Video Games",
 	];
@@ -34,9 +36,9 @@ const Interests = () => {
 	});
 	return (
 		<div className="sub-container">
-			<h2 className="text-ac mb-2">
+			<h1 className="text-ac mb-2">
 				<span className="text-ul">Intrests & Skills</span>
-			</h2>
+			</h1>
 			<div className={classes.skills}>{html}</div>
 		</div>
 	);

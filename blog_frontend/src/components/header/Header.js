@@ -8,7 +8,7 @@ const Header = () => {
 		<header className={`sub-container ${classes.header}`}>
 			<nav className={classes.nav_holder}>
 				<div className={classes.logo}>
-					<img src={logo} />
+					<img src={logo} alt="react baby" />
 				</div>
 				<Nav />
 			</nav>

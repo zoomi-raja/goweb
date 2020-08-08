@@ -3,9 +3,9 @@ import React from "react";
 const Intro = () => {
 	return (
 		<div className="sub-container">
-			<h2 className="text-ac mb-1">
+			<h1 className="text-ac mb-1">
 				<span className="text-ul">Let me introduct my self</span>
-			</h2>
+			</h1>
 			<p className="paragraph">
 				I am a university graduate and for me as a Web Developer it's been a 7
 				year long journey. My first programming language was C and throughout my

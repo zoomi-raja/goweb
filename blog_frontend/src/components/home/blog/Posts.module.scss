@@ -1,0 +1,7 @@
+.posts {
+	display: flex;
+	justify-content: space-between;
+	& > div {
+		flex-basis: 32%;
+	}
+}
