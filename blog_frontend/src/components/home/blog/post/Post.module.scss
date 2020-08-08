@@ -1,21 +1,27 @@
-.postHeader {
-	&:hover a {
-		border-bottom: 0.2rem solid var(--utiliy-bcolor);
+@import "../../../../utility.scss";
+.post {
+	@include respond(phone) {
+		margin-bottom: 2rem;
 	}
-	a {
-		text-transform: capitalize;
-		padding: 0.5rem 0;
+	&Header {
+		&:hover a {
+			border-bottom: 0.2rem solid var(--utiliy-bcolor);
+		}
+		a {
+			text-transform: capitalize;
+			padding: 0.5rem 0;
+		}
 	}
-}
-.postFooter {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 2rem;
-	&_date {
-		color: var(--text-secondary-dark);
-	}
-	&_link {
-		color: var(--utiliy-bcolor);
+	&Footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 2rem;
+		&_date {
+			color: var(--text-secondary-dark);
+		}
+		&_link {
+			color: var(--utiliy-bcolor);
+		}
 	}
 }

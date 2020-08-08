@@ -4,7 +4,7 @@ import classes from "./Post.module.scss";
 const Post = (props) => {
 	let limit = 250;
 	return (
-		<div className="sub-container">
+		<div className={`sub-container ${classes.post}`}>
 			<h3 className={`text-ac mb-1 ${classes.postHeader}`}>
 				<a href="/">{props.title}</a>
 			</h3>

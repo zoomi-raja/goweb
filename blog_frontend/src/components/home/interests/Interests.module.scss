@@ -1,4 +1,8 @@
+@import "../../../utility.scss";
 .skills {
+	@include respond(phone) {
+		text-align: center;
+	}
 	.skill {
 		display: inline-block;
 		display: inline-block;

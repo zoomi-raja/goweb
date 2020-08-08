@@ -6,7 +6,7 @@ import pic from "../../../assets/zoomi.jpeg";
 import Social from "../../social/Social";
 const Header = () => {
 	return (
-		<div className="sub-container" style={{ position: "relative" }}>
+		<div className={`sub-container ${classes.sectionHeader}`}>
 			<a className={classes.downloadResume} href="/">
 				Resume <span>&darr;</span>
 			</a>

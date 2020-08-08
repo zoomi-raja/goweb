@@ -1,3 +1,4 @@
+@import "../../../utility";
 .downloadResume {
 	position: absolute;
 	top: 2rem;
@@ -6,13 +7,45 @@
 		border-bottom: 1px solid var(--utiliy-ycolor);
 	}
 }
+.sectionHeader {
+	position: relative;
+	&::before {
+		content: "";
+		@include respond(phone) {
+			background-image: url("/static/media/zoomi.9282fd31.jpeg");
+			background-attachment: fixed;
+			background-position: -368px -215px;
+			background-repeat: no-repeat;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+	}
+}
 .header {
 	margin: 0 auto;
 	padding: 2rem;
 	width: 50%;
 	display: flex;
+	@media (max-width: 62.5em) {
+		//1000
+		width: 70%;
+		justify-content: space-between;
+	}
+	@include respond(phone) {
+		width: 100%;
+		background-color: var(--main-color);
+		border-radius: 5px;
+		opacity: 0.9;
+		justify-content: space-around;
+	}
 	.imgHolder {
 		flex-basis: 32%;
+		@include respond(phone) {
+			display: none;
+		}
 		img {
 			border-radius: 5px;
 		}
