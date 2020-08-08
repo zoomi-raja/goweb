@@ -1,0 +1,11 @@
+.footer {
+	background-color: var(--secondary-color);
+	color: var(--main-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	span {
+		letter-spacing: 0.1rem;
+		font-size: 1.2rem;
+	}
+}

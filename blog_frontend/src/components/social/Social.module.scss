@@ -1,0 +1,19 @@
+.socialIcons {
+	a {
+		line-height: 0;
+		display: inline-block;
+		&:not(:first-child) {
+			margin-left: 2rem;
+		}
+		svg {
+			color: var(--utiliy-bcolor);
+			width: 3.4rem;
+			height: 3.4rem;
+			border-radius: 50%;
+			fill: currentColor;
+			path {
+				background-color: #fff;
+			}
+		}
+	}
+}
