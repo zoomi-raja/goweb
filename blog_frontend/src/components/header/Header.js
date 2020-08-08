@@ -3,6 +3,10 @@ import logo from "../../assets/logo.svg";
 import classes from "./Header.module.scss";
 import Nav from "./nav/Nav";
 import Signin from "../../containers/signin/Signin";
+import { animateScroll as scroll } from "react-scroll";
+const scrollToTop = () => {
+	scroll.scrollToTop({ smooth: true, duration: 300 });
+};
 const Header = () => {
 	const [isSticky, setSticky] = useState(false);
 	const ref = useRef(null);
@@ -21,8 +25,12 @@ const Header = () => {
 	let headerClass = isSticky
 		? `${classes.header} ${classes.sticky}`
 		: classes.header;
+	let showGoUp = isSticky ? `${classes.goUp} ${classes.show}` : classes.goUp;
 	return (
 		<header className={`sub-container ${headerClass}`} ref={ref}>
+			<div className={showGoUp} onClick={scrollToTop}>
+				&uarr;
+			</div>
 			<nav className={classes.nav_holder}>
 				<div className={classes.logo}>
 					<img src={logo} alt="react baby" />

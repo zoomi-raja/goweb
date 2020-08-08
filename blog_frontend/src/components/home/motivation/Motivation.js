@@ -3,7 +3,7 @@ import classes from "./Motivation.module.scss";
 import go from "../../../assets/golang.png";
 const Motivation = () => {
 	return (
-		<div className="sub-container">
+		<div className="sub-container" id="motivation">
 			<h1 className="text-ac mb-1">
 				<span className="text-ul">Motivation</span>
 			</h1>

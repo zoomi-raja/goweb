@@ -2,7 +2,7 @@ import React from "react";
 
 const Intro = () => {
 	return (
-		<div className="sub-container">
+		<div className="sub-container" id="intro">
 			<h1 className="text-ac mb-1">
 				<span className="text-ul">Let me introduct my self</span>
 			</h1>

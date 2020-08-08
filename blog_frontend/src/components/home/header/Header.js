@@ -6,7 +6,10 @@ import pic from "../../../assets/zoomi.jpeg";
 import Social from "../../social/Social";
 const Header = () => {
 	return (
-		<div className="sub-container">
+		<div className="sub-container" style={{ position: "relative" }}>
+			<a className={classes.downloadResume} href="/">
+				Resume <span>&darr;</span>
+			</a>
 			<div className={classes.header}>
 				<div className={classes.imgHolder}>
 					<img src={pic} alt="zamurd ali" />

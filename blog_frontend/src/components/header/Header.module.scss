@@ -1,4 +1,24 @@
 .header {
+	.goUp {
+		position: fixed;
+		bottom: 3rem;
+		right: 3rem;
+		width: 4.4rem;
+		height: 4.4rem;
+		border-radius: 50%;
+		background-color: var(--utiliy-bcolor);
+		text-align: center;
+		line-height: 4.4rem;
+		font-size: 3rem;
+		transition: 0.2s ease all;
+		opacity: 0;
+		visibility: hidden;
+		cursor: pointer;
+		&.show {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
 	&.sticky {
 		padding: 1rem 2rem;
 	}
@@ -10,6 +30,7 @@
 	top: 0;
 	transition: all ease 0.2s;
 	box-shadow: 0 0.001rem 0.5rem rgba(0, 0, 0, 0.09);
+	z-index: 100;
 	.nav_holder {
 		position: relative;
 		.logo {

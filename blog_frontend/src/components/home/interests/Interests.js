@@ -35,7 +35,7 @@ const Interests = () => {
 		);
 	});
 	return (
-		<div className="sub-container">
+		<div className="sub-container" id="interests">
 			<h1 className="text-ac mb-2">
 				<span className="text-ul">Intrests & Skills</span>
 			</h1>

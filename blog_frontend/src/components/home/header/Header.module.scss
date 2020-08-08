@@ -1,3 +1,11 @@
+.downloadResume {
+	position: absolute;
+	top: 2rem;
+	right: 2rem;
+	&:hover {
+		border-bottom: 1px solid var(--utiliy-ycolor);
+	}
+}
 .header {
 	margin: 0 auto;
 	padding: 2rem;

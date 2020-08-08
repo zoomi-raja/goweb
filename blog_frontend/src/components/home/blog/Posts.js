@@ -29,7 +29,7 @@ const Posts = () => {
 		return <Post {...post} key={i} />;
 	});
 	return (
-		<div className={classes.articles}>
+		<div className={classes.articles} id="articles">
 			<h1 className="text-ac mb-2">
 				<span className="text-ul">Articles</span>
 			</h1>

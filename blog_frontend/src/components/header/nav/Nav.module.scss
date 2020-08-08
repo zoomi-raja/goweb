@@ -7,12 +7,6 @@
 		&:not(:first-child) {
 			margin-left: 2rem;
 		}
-		&.active {
-			border-bottom: 0.2rem solid var(--utiliy-ycolor);
-		}
-		&:hover {
-			border-bottom: 0.2rem solid var(--utiliy-bcolor);
-		}
 		a {
 			text-transform: capitalize;
 		}
