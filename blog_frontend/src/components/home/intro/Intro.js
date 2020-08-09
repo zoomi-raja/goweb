@@ -4,7 +4,7 @@ const Intro = () => {
 	return (
 		<div className="sub-container" id="intro">
 			<h1 className="text-ac mb-1">
-				<span className="text-ul">Let me introduct my self</span>
+				<span className="text-ul">Let me introduce my self</span>
 			</h1>
 			<p className="paragraph">
 				I am a university graduate and for me as a Web Developer it's been a 7
