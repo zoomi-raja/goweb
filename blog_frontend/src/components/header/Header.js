@@ -9,6 +9,15 @@ const scrollToTop = () => {
 };
 const Header = () => {
 	const [isSticky, setSticky] = useState(false);
+	const [isDark, setIsDark] = useState(false);
+	const changeTheme = () => {
+		if (!isDark) {
+			document.body.classList.add("dark");
+		} else {
+			document.body.classList.remove("dark");
+		}
+		setIsDark(!isDark);
+	};
 	const ref = useRef(null);
 	const handleScroll = () => {
 		if (ref.current) {
@@ -33,7 +42,7 @@ const Header = () => {
 			</div>
 			<nav className={classes.nav_holder}>
 				<div className={classes.logo}>
-					<img src={logo} alt="react baby" />
+					<img src={logo} alt="react baby" onClick={changeTheme} />
 				</div>
 				<Nav />
 			</nav>

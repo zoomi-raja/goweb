@@ -17,7 +17,15 @@
 }
 .dark {
 	//todo setting for dark theme
-	--background-color: #333;
+	--background-color: #212020;
+	--secondary-color: #fff;
+	--main-color: #333;
+	--utiliy-ycolor: #ffbc00;
+	--utiliy-bcolor: #61dafb;
+	--utiliy-gcolor: #615e5e;
+
+	--text-main-color: #faf9f9;
+	--text-secondary-dark: #777;
 }
 html {
 	font-size: 62.5%;
