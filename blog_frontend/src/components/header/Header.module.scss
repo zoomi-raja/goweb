@@ -43,10 +43,13 @@
 			height: 6rem;
 			top: 0;
 			left: 0;
-			transform: translate(-25%, -30%);
+			transform: translate(-12%, -16%);
 			cursor: pointer;
 			@media (prefers-reduced-motion: no-preference) {
-				img {
+				svg {
+					width: 4rem;
+					height: 4rem;
+					fill: var(--utiliy-bcolor);
 					animation: App-logo-spin infinite 20s linear;
 				}
 			}
