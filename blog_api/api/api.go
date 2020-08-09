@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/zoomi-raja/goweb/api/router"
 	"github.com/zoomi-raja/goweb/config"
@@ -15,5 +16,5 @@ func Run() {
 }
 func listen(port int) {
 	r := router.New()
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), http.TimeoutHandler(r, time.Second*1, "timeout")))
 }
