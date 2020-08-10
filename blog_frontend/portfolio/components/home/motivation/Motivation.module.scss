@@ -1,0 +1,14 @@
+@import "../../../../styles/utility.scss";
+.motivation {
+	display: flex;
+	&_para {
+		flex: 1;
+	}
+	&_img {
+		@include respond(phone) {
+			display: none;
+		}
+		flex-basis: 28%;
+		margin-top: -5rem;
+	}
+}

@@ -1,0 +1,77 @@
+@import "../../../../styles/utility.scss";
+.downloadResume {
+	position: absolute;
+	top: 2rem;
+	right: 2rem;
+	&:hover {
+		border-bottom: 1px solid var(--utiliy-ycolor);
+	}
+}
+.sectionHeader {
+	position: relative;
+	&::before {
+		content: "";
+		@include respond(phone) {
+			background-image: url("/_next/static/images/zoomi-1899a15ca7c0e15cc559abb186d39985.jpeg");
+			background-attachment: fixed;
+			background-position: -368px -215px;
+			background-repeat: no-repeat;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+	}
+}
+.header {
+	margin: 0 auto;
+	padding: 2rem;
+	width: 50%;
+	display: flex;
+	@media (max-width: 62.5em) {
+		//1000
+		width: 70%;
+		justify-content: space-between;
+	}
+	@include respond(phone) {
+		width: 100%;
+		background-color: var(--main-color);
+		border-radius: 5px;
+		opacity: 0.9;
+		justify-content: space-around;
+	}
+	.imgHolder {
+		flex-basis: 32%;
+		@include respond(phone) {
+			display: none;
+		}
+		img {
+			border-radius: 5px;
+		}
+	}
+	.infoHolder {
+		margin-left: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		.infoPersonal {
+			font-size: 2rem;
+			font-weight: 500;
+		}
+		.contact {
+			.contact_item {
+				margin-top: 1rem;
+				&:last-child {
+					margin-bottom: 1rem;
+				}
+				svg {
+					margin-right: 2rem;
+					vertical-align: middle;
+					fill: currentColor;
+					color: var(--text-secondary-dark);
+				}
+			}
+		}
+	}
+}

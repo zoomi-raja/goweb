@@ -1,0 +1,68 @@
+@import "../../../styles/utility.scss";
+.header {
+	.goUp {
+		position: fixed;
+		bottom: 3rem;
+		right: 3rem;
+		width: 4.4rem;
+		height: 4.4rem;
+		border-radius: 50%;
+		background-color: var(--utiliy-bcolor);
+		color: var(--utiliy-gcolor);
+		text-align: center;
+		line-height: 4.4rem;
+		font-size: 3rem;
+		transition: 0.2s ease all;
+		opacity: 0;
+		visibility: hidden;
+		cursor: pointer;
+		@include respond(phone) {
+			bottom: 9.2rem;
+		}
+		&.show {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
+	&.sticky {
+		padding: 1rem 2rem;
+	}
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	transition: all ease 0.2s;
+	box-shadow: 0 0.001rem 0.5rem rgba(0, 0, 0, 0.09);
+	z-index: 100;
+	.nav_holder {
+		position: relative;
+		.logo {
+			position: absolute;
+			width: 6rem;
+			height: 6rem;
+			top: 0;
+			left: 0;
+			transform: translate(-12%, -16%);
+			cursor: pointer;
+			@media (prefers-reduced-motion: no-preference) {
+				svg {
+					width: 4rem;
+					height: 4rem;
+					fill: var(--utiliy-bcolor);
+					animation: App-logo-spin infinite 20s linear;
+				}
+			}
+		}
+	}
+}
+//animation
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

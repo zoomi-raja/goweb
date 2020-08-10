@@ -1,0 +1,11 @@
+@import "../../../../styles/utility.scss";
+.posts {
+	display: flex;
+	justify-content: space-between;
+	@include respond(phone) {
+		display: block;
+	}
+	& > div {
+		flex-basis: 32%;
+	}
+}
