@@ -1,6 +1,7 @@
 package models
 
 import (
+	"encoding/base64"
 	"fmt"
 
 	"github.com/zoomi-raja/goweb/api/utils"
@@ -9,9 +10,11 @@ import (
 
 type Post struct {
 	ID        uint32 `json:"id"`
+	Intro     string `json:"intro"`
 	Title     string `json:"title"`
 	Body      string `json:"body"`
 	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 var table string = "posts"
@@ -20,16 +23,23 @@ func (p Post) GetAll() ([]Post, error) {
 	posts := make([]Post, 0)
 	db, _ := database.Connect()
 	defer db.Close()
-	result, err := db.Query(fmt.Sprintf("SELECT id, title, body, created_at FROM %s", table))
+	result, err := db.Query(fmt.Sprintf("SELECT id, intro, title, body, created_at, updated_at FROM %s", table))
 	if err != nil {
 		return nil, err
 	}
 	defer result.Close()
 	for result.Next() {
 		var post Post
-		result.Scan(&post.ID, &post.Title, &post.Body, &post.CreatedAt)
+		result.Scan(&post.ID, &post.Intro, &post.Title, &post.Body, &post.CreatedAt, &post.UpdatedAt)
 		dateTime, _ := utils.FormateDate(post.CreatedAt)
 		post.CreatedAt = dateTime
+		dateTime2, _ := utils.FormateDate(post.UpdatedAt)
+		post.UpdatedAt = dateTime2
+		if data, err := base64.StdEncoding.DecodeString(post.Body); err != nil {
+			return nil, err
+		} else {
+			post.Body = string(data)
+		}
 		posts = append(posts, post)
 	}
 	return posts, nil

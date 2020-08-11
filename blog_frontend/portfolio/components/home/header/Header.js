@@ -28,7 +28,7 @@ const Header = () => {
 									strings: [
 										"Learner ..!",
 										"Web Developer ..!",
-										"FP Gamer ..!",
+										"Video Gamer ..!",
 										"Programmer ..!",
 									],
 									changeDeleteSpeed: 0.5,

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import classes from "./Post.module.scss";
 
 const Post = (props) => {
@@ -10,10 +11,10 @@ const Post = (props) => {
 			</h3>
 			<p>{props.body.substring(0, limit) + "..."}</p>
 			<div className={classes.postFooter}>
-				<span className={classes.postFooter_date}>{props.date}</span>
-				<a className={classes.postFooter_link} href="/">
-					&rarr;
-				</a>
+				<span className={classes.postFooter_date}>{props.createdAt}</span>
+				<Link href="/post/[pid]" as={`/post/${props.id}`}>
+					<a className={classes.postFooter_link}>&rarr;</a>
+				</Link>
 			</div>
 		</div>
 	);

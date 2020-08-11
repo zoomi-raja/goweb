@@ -19,6 +19,7 @@ CREATE TABLE `goDatabase`.`posts`
   `title` VARCHAR
 (45) NOT NULL,
   `body` LONGTEXT NOT NULL,
+  `intro` VARCHAR(250) NOT NULL,
   `meta_data` VARCHAR
 (150) NULL,
   `claps` INT NOT NULL DEFAULT 0,
