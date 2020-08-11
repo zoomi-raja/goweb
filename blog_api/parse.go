@@ -9,10 +9,6 @@ import (
 	"strings"
 )
 
-var (
-	itration int
-)
-
 // SitemapIndex will be exported
 type SitemapIndex struct {
 	Locations []string `xml:"sitemap>loc"`
@@ -29,10 +25,13 @@ type NewsMap struct {
 	Keyword  string
 	Location string
 }
+type trackR struct {
+	current int
+	length  int
+}
 
-func getNews(url string, length int, c chan News) {
+func getNews(url string, lengthPointer *trackR, c chan News) {
 	var n News
-	itration++
 	resp, err := http.Get(strings.TrimSpace(url))
 	if err != nil {
 		fmt.Println(err)
@@ -40,9 +39,10 @@ func getNews(url string, length int, c chan News) {
 	bytes, _ := ioutil.ReadAll(resp.Body)
 	xml.Unmarshal(bytes, &n)
 	resp.Body.Close()
-	fmt.Println(itration)
 	c <- n
-	if itration == length {
+	lengthPointer.current++
+	if lengthPointer.current >= lengthPointer.length {
+		fmt.Println(*lengthPointer)
 		close(c)
 	}
 }
@@ -58,9 +58,10 @@ func parse() map[string]NewsMap {
 	resp.Body.Close()
 	xml.Unmarshal(bytes, &s)
 	chanelLength := len(s.Locations)
-	c := make(chan News, chanelLength)
+	keeptrack := &trackR{0, chanelLength}
+	c := make(chan News)
 	for i := 0; i < chanelLength; i++ {
-		go getNews(s.Locations[i], chanelLength, c)
+		go getNews(s.Locations[i], keeptrack, c)
 	}
 	for ch := range c {
 		for idx, _ := range ch.Keywords {
