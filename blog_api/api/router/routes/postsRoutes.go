@@ -14,6 +14,11 @@ func init() {
 			Handler: controllers.GetPosts,
 		},
 		Route{
+			Uri:     "/posts/{id}",
+			Method:  http.MethodGet,
+			Handler: controllers.GetPost,
+		},
+		Route{
 			Uri:     "/posts",
 			Method:  http.MethodPost,
 			Handler: controllers.CreatePosts,

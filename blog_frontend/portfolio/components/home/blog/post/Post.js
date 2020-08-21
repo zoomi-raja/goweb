@@ -9,7 +9,7 @@ const Post = (props) => {
 			<h3 className={`text-ac mb-1 ${classes.postHeader}`}>
 				<a href="/">{props.title}</a>
 			</h3>
-			<p>{props.body.substring(0, limit) + "..."}</p>
+			<p>{props.intro.substring(0, limit) + "..."}</p>
 			<div className={classes.postFooter}>
 				<span className={classes.postFooter_date}>{props.createdAt}</span>
 				<Link href="/post/[pid]" as={`/post/${props.id}`}>
