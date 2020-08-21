@@ -4,9 +4,14 @@ import (
 	"net/http"
 
 	"github.com/zoomi-raja/goweb/api/controllers"
+	"github.com/zoomi-raja/goweb/api/middleware"
 )
 
 func init() {
+	middlewares := []middleware.Middleware{
+		middleware.AuthMiddleware,
+	}
+
 	var pRoutes = []Route{
 		Route{
 			Uri:     "/posts",
@@ -21,7 +26,7 @@ func init() {
 		Route{
 			Uri:     "/posts",
 			Method:  http.MethodPost,
-			Handler: controllers.CreatePosts,
+			Handler: middleware.Addmiddlewares(controllers.CreatePosts, middlewares),
 		},
 	}
 	routes = append(routes, pRoutes...)

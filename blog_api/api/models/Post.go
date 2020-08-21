@@ -9,7 +9,9 @@ import (
 )
 
 type Post struct {
-	ID        uint32 `json:"id"`
+	ID        int64  `json:"id"`
+	UserID    int64  `json:"userId"`
+	Claps     int64  `json:"claps"`
 	Intro     string `json:"intro"`
 	Title     string `json:"title"`
 	Body      string `json:"body"`
@@ -17,20 +19,20 @@ type Post struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
-var table string = "posts"
+var postTable string = "posts"
 
 func (p Post) GetAll() ([]Post, error) {
 	posts := make([]Post, 0)
 	db, _ := database.Connect()
 	defer db.Close()
-	result, err := db.Query(fmt.Sprintf("SELECT id, intro, title, created_at, updated_at FROM %s", table))
+	result, err := db.Query(fmt.Sprintf("SELECT id, claps, intro, title, created_at, updated_at FROM %s", postTable))
 	if err != nil {
 		return nil, err
 	}
 	defer result.Close()
 	for result.Next() {
 		var post Post
-		result.Scan(&post.ID, &post.Intro, &post.Title, &post.CreatedAt, &post.UpdatedAt)
+		result.Scan(&post.ID, &post.Claps, &post.Intro, &post.Title, &post.CreatedAt, &post.UpdatedAt)
 		dateTime, _ := utils.FormateDate(post.CreatedAt)
 		post.CreatedAt = dateTime
 		dateTime2, _ := utils.FormateDate(post.UpdatedAt)
@@ -45,10 +47,10 @@ func (p Post) GetById(id int) (Post, error) {
 	var post Post
 	db, _ := database.Connect()
 	defer db.Close()
-	sqlQuery := fmt.Sprintf(`SELECT id, intro, title, body, created_at, updated_at FROM %s WHERE id=?;`, table)
+	sqlQuery := fmt.Sprintf(`SELECT id, claps, intro, title, body, created_at, updated_at FROM %s WHERE id=?;`, postTable)
 
 	row := db.QueryRow(sqlQuery, id)
-	if err := row.Scan(&post.ID, &post.Intro, &post.Title, &post.Body, &post.CreatedAt, &post.UpdatedAt); err != nil {
+	if err := row.Scan(&post.ID, &post.Claps, &post.Intro, &post.Title, &post.Body, &post.CreatedAt, &post.UpdatedAt); err != nil {
 		return post, err
 	} else {
 		dateTime, _ := utils.FormateDate(post.CreatedAt)
@@ -62,6 +64,19 @@ func (p Post) GetById(id int) (Post, error) {
 		}
 		return post, nil
 	}
+}
+
+/*CreatePost to create post in db*/
+func (p Post) CreatePost() (int64, error) {
+	db, _ := database.Connect()
+	defer db.Close()
+	result, err := db.Exec(fmt.Sprintf("insert into %s (title, intro, body, user_id) values (?,?,?,?)", postTable), p.Title, p.Intro, p.Body, p.UserID)
+	if err != nil {
+		return 0, err
+	}
+	id, _ := result.LastInsertId()
+	p.ID = id
+	return id, nil
 }
 
 //todo query should be here
