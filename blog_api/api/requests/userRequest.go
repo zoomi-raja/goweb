@@ -1,9 +1,5 @@
 package requests
 
-import (
-	"github.com/zoomi-raja/goweb/api/utils"
-)
-
 type User struct {
 	Email    string `json:"email"`
 	Username string `json:"username"`
@@ -11,7 +7,7 @@ type User struct {
 	Avatar   string `json:"avatar"`
 }
 
-func (u User) ValidateUserCreate() utils.ErrorsArr {
+func (u User) ValidateUserCreate() ErrorsArr {
 	varlidator := requestValidator{}
 	varlidator.RequestFields = []field{
 		field{

@@ -12,7 +12,6 @@ import (
 )
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
-	(w).Header().Set("Access-Control-Allow-Origin", "*")
 	post := models.Post{}
 	keys := r.URL.Query()
 	//	keys := r.FormValue("limit")

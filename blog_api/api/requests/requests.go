@@ -3,8 +3,6 @@ package requests
 import (
 	"fmt"
 	"regexp"
-
-	"github.com/zoomi-raja/goweb/api/utils"
 )
 
 var (
@@ -24,8 +22,8 @@ type field struct {
 	value    string
 }
 
-func (r requestValidator) validate() *utils.ErrorArr {
-	errArr := utils.ErrorArr{}
+func (r requestValidator) validate() *ErrorArr {
+	errArr := ErrorArr{}
 	if len(r.RequestFields) <= 0 {
 		return &errArr
 	}

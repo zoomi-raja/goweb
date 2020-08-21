@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/zoomi-raja/goweb/api/utils"
+	"github.com/zoomi-raja/goweb/api/requests"
 )
 
 func JSON(w http.ResponseWriter, statusCode int, data interface{}) {
@@ -26,8 +26,8 @@ func ERROR(w http.ResponseWriter, statusCode int, err error) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(statusCode)
 		switch errType := err.(type) {
-		case *utils.ErrorArr:
-			errs := err.(*utils.ErrorArr)
+		case *requests.ErrorArr:
+			errs := err.(*requests.ErrorArr)
 			errInfo["ERR"] = errs.GetErros()
 			errInfo["TYPE"] = errType
 		default:

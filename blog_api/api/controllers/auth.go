@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-sql-driver/mysql"
 	"github.com/zoomi-raja/goweb/api/cookies"
 	"github.com/zoomi-raja/goweb/api/security"
 
@@ -64,7 +65,13 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	authModel := models.Auth{Email: user.Email, Username: user.Username, Password: user.Password}
 	if userId, err := authModel.CreateUser(); err != nil {
-		responses.ERROR(w, http.StatusInternalServerError, err) //*mysql.MySQLError error type
+		me, ok := err.(*mysql.MySQLError)
+		if !ok {
+			responses.ERROR(w, http.StatusInternalServerError, err)
+		}
+		if me.Number == 1062 {
+			responses.ERROR(w, http.StatusUnprocessableEntity, errors.New("email already exists"))
+		}
 	} else {
 		token, err := authModel.CreatenToken()
 		if err != nil {
