@@ -1,0 +1,18 @@
+FROM golang:1.14 as builder
+WORKDIR /app
+
+COPY go.mod . 
+COPY go.sum .
+# befor copy commany so it get caches otherwise it will try to fetch everytime
+RUN go mod download
+
+COPY . .
+
+RUN go build main.go
+FROM centos:7
+COPY --from=builder /app/main /app/
+COPY --from=builder /app/.env /app/
+WORKDIR /app
+
+EXPOSE 8000
+CMD ["./main"]

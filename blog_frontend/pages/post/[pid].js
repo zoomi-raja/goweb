@@ -4,6 +4,7 @@ import classes from "./Blog.module.scss";
 import Layout from "../../portfolio/hoc/layout/Layout";
 function markupToHtml({ body }) {
 	body = body.replace(/\n/g, "<br />");
+
 	body = body.replace(/(>|^)#{1}\s(.*?)(?=<|$)/gm, "$1<h1>$2</h1>");
 	body = body.replace(/(>|^)#{2}\s(.*?)(?=<|$)/gm, "$1<h2>$2</h2>");
 	//for heading h3
@@ -15,11 +16,18 @@ function markupToHtml({ body }) {
 		/(>|^)\`{3}(.+?)(\`{3})/gm,
 		"$1<pre><code>$2</code></pre>"
 	);
+
 	//parse single line fo code
-	body = body.replace(/(>|^)\`{1}(.+?)(\`{1})/gm, "$1<p><code>$2</code></p>");
+	body = body.replace(
+		/(>|^|\s)\`{1}(.+?)(\`{1})/gm,
+		"$1<p><code>$2</code></p>"
+	);
 	//conver markup for hyperlinks
 
-	body = body.replace(/\[([\/a-zA-Z]+?)\]\((.*?)\)/gm, "<a href='$2'>$1</a>");
+	body = body.replace(
+		/\[([\/\s'a-zA-Z]+?)\]\((.*?)\)/gm,
+		"<a href='$2'>$1</a>"
+	);
 	body = body.replace(/<br \/><br \/>/g, "<br />");
 	return body;
 }
