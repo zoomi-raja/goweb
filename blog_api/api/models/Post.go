@@ -70,6 +70,7 @@ func (p Post) GetById(id int) (Post, error) {
 func (p Post) CreatePost() (int64, error) {
 	db, _ := database.Connect()
 	defer db.Close()
+	p.Body = base64.StdEncoding.EncodeToString([]byte(p.Body))
 	result, err := db.Exec(fmt.Sprintf("insert into %s (title, intro, body, user_id) values (?,?,?,?)", postTable), p.Title, p.Intro, p.Body, p.UserID)
 	if err != nil {
 		return 0, err
