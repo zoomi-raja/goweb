@@ -1,0 +1,22 @@
+.blog {
+	margin-top: 2rem;
+	p,
+	pre {
+		background: var(--utiliy-gcolor);
+		color: var(--gray-color-light2);
+		padding: 0.5rem 1rem;
+		border-radius: 0.3rem;
+	}
+	p {
+		display: inline-block;
+		line-height: 1.5rem;
+		margin-bottom: 1rem;
+	}
+	pre {
+		text-align: center;
+		code {
+			display: inline-block;
+			text-align: left;
+		}
+	}
+}

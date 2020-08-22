@@ -1,43 +1,30 @@
-import Head from "next/head";
-import Layout from "../../portfolio/hoc/layout/Layout";
 import axios from "axios";
-const Post = (props) => {
-	console.log(props.data.body);
-	props.data.body = props.data.body.replace(/\n/g, "<br />");
-	props.data.body = props.data.body.replace(
-		/(>|^)#{1}\s(.*?)(?=<|$)/gm,
-		"$1<h1>$2</h1>"
-	);
-	props.data.body = props.data.body.replace(
-		/(>|^)#{2}\s(.*?)(?=<|$)/gm,
-		"$1<h2>$2</h2>"
-	);
+import Head from "next/head";
+import classes from "./Blog.module.scss";
+import Layout from "../../portfolio/hoc/layout/Layout";
+function markupToHtml({ body }) {
+	body = body.replace(/\n/g, "<br />");
+	body = body.replace(/(>|^)#{1}\s(.*?)(?=<|$)/gm, "$1<h1>$2</h1>");
+	body = body.replace(/(>|^)#{2}\s(.*?)(?=<|$)/gm, "$1<h2>$2</h2>");
 	//for heading h3
-	props.data.body = props.data.body.replace(
-		/(>|^)#{3}\s(.*?)(?=<|$)/gm,
-		"$1<h3>$2</h3>"
-	);
+	body = body.replace(/(>|^)#{3}\s(.*?)(?=<|$)/gm, "$1<h3>$2</h3>");
 	//to make text bold
-	props.data.body = props.data.body.replace(
-		/\*{2}(.*?)\*{2}/gm,
-		"<strong>$1</strong>"
-	);
+	body = body.replace(/\*{2}(.*?)\*{2}/gm, "<strong>$1</strong>");
 	//parse block of code
-	props.data.body = props.data.body.replace(
+	body = body.replace(
 		/(>|^)\`{3}(.+?)(\`{3})/gm,
 		"$1<pre><code>$2</code></pre>"
 	);
 	//parse single line fo code
-	props.data.body = props.data.body.replace(
-		/(>|^)\`{1}(.+?)(\`{1})/gm,
-		"$1<p><code>$2</code></p>"
-	);
+	body = body.replace(/(>|^)\`{1}(.+?)(\`{1})/gm, "$1<p><code>$2</code></p>");
 	//conver markup for hyperlinks
 
-	props.data.body = props.data.body.replace(
-		/\[([\/a-zA-Z]+?)\]\((.*?)\)/gm,
-		"<a href='$2'>$1</a>"
-	);
+	body = body.replace(/\[([\/a-zA-Z]+?)\]\((.*?)\)/gm, "<a href='$2'>$1</a>");
+	body = body.replace(/<br \/><br \/>/g, "<br />");
+	return body;
+}
+const Post = (props) => {
+	let html = markupToHtml({ ...props.data });
 	return (
 		<div>
 			<Head>
@@ -47,9 +34,12 @@ const Post = (props) => {
 			<div className="container">
 				<Layout header="blog">
 					<section className="section">
+						<h1 className="text-ac">
+							<span className="text-ul">{props.data.title}</span>
+						</h1>
 						<div
-							className="sub-container"
-							dangerouslySetInnerHTML={{ __html: props.data.body }}
+							className={`sub-container paragraph ${classes.blog}`}
+							dangerouslySetInnerHTML={{ __html: html }}
 						></div>
 					</section>
 				</Layout>
