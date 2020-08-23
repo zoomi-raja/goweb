@@ -21,3 +21,15 @@ script:
   - echo "$DOCKER_PASSWORD" | docker login -u  "$DOCKER_ID" --password-stdin
   - docker push zoomiraja/blogfrontend
   - docker push zoomiraja/goblog
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: web-blog
+  env: WebBlog-env,
+  bucket_name: elasticbeanstalk-us-east-2-960149412742.
+  bucket_path: web-blog
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

@@ -1,0 +1,72 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "blog_api",
+			"links": ["go_db"],
+			"image": "zoomiraja/goblog",
+			"essential": false,
+			"portMappings": [
+				{
+					"containerPort": 8000,
+					"hostPort": 8010
+				}
+			],
+			"environment": [
+				{
+					"name": "API_PORT",
+					"value": "8000"
+				},
+				{
+					"name": "DB_DRIVER",
+					"value": "mysql"
+				},
+				{
+					"name": "DB_USER",
+					"value": "root"
+				},
+				{
+					"name": "DB_PASS",
+					"value": "test"
+				},
+				{
+					"name": "DB_NAME",
+					"value": "goDatabase"
+				}
+			],
+			"memory": 500,
+			"cpu": 1
+		},
+		{
+			"name": "blog_frontend",
+			"links": ["blog_api"],
+			"image": "zoomiraja/zoomiraja/blogfrontend",
+			"essential": false,
+			"portMappings": [
+				{
+					"containerPort": 3000,
+					"hostPort": 80
+				}
+			],
+			"memory": 500,
+			"cpu": 1
+		},
+		{
+			"name": "go_db",
+			"image": "mysql:5.6",
+			"essential": true,
+			"environment": [
+				{
+					"name": "MYSQL_DATABASE",
+					"value": "goDatabase"
+				},
+				{
+					"name": "MYSQL_ROOT_PASSWORD",
+					"value": "test"
+				}
+			],
+			"memory": 500,
+			"cpu": 1
+		}
+	]
+}
