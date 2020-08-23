@@ -34,7 +34,21 @@
 					"value": "goDatabase"
 				}
 			],
-			"memory": 500,
+			"memory": 250,
+			"cpu": 1
+		},
+		{
+			"name": "blog_frontend",
+			"links": ["blog_api"],
+			"image": "zoomiraja/zoomiraja/blogfrontend",
+			"essential": false,
+			"portMappings": [
+				{
+					"containerPort": 3000,
+					"hostPort": 80
+				}
+			],
+			"memory": 450,
 			"cpu": 1
 		},
 		{
@@ -51,7 +65,7 @@
 					"value": "test"
 				}
 			],
-			"memory": 150,
+			"memory": 100,
 			"cpu": 1
 		}
 	]
