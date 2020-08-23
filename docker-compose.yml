@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     ports:
-      - 80:8000
+      - 8010:8000
     volumes:
       - ./blog_api/:/app
     environment:
@@ -21,24 +21,20 @@ services:
       - blog_front_modules:/app/node_modules
       - blog_build:/app/.next
     ports:
-      - 3001:3000
+      - 80:3000
   db:
     image: mysql:5.6
     container_name: go_db
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: goDatabase
-      MYSQL_USER: user
-      MYSQL_PASSWORD: test
-      MYSQL_ROOT_PASSWORD: test
+      - MYSQL_DATABASE=goDatabase
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=test
+      - MYSQL_ROOT_PASSWORD=test
     volumes:
       - ./dump:/docker-entrypoint-initdb.d
       - persistent:/var/lib/mysql
-    environment:
-      MYSQL_USER: user
-      MYSQL_PASSWORD: test
-      MYSQL_ROOT_PASSWORD: test
 volumes:
   persistent:
   blog_front_modules:
