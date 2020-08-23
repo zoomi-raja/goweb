@@ -34,7 +34,7 @@
 					"value": "goDatabase"
 				}
 			],
-			"memory": 1000,
+			"memory": 500,
 			"cpu": 1
 		},
 		{
@@ -51,7 +51,7 @@
 					"value": "test"
 				}
 			],
-			"memory": 500,
+			"memory": 150,
 			"cpu": 1
 		}
 	]
