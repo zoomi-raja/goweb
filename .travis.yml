@@ -26,7 +26,7 @@ deploy:
   provider: elasticbeanstalk
   region: us-east-2
   app: web-blog
-  env: WebBlog-env,
+  env: WebBlog-env
   bucket_name: elasticbeanstalk-us-east-2-960149412742
   bucket_path: web-blog
   on:
