@@ -8,7 +8,7 @@
 			"essential": false,
 			"portMappings": [
 				{
-					"hostPort": 8010,
+					"hostPort": 49,
 					"containerPort": 8000
 				}
 			],
