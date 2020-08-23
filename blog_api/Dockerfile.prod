@@ -9,10 +9,10 @@ RUN go mod download
 COPY . ./
 
 RUN go build main.go
-# FROM centos:7
-# COPY --from=0 /app/main /app/
-# COPY --from=0 /app/.env /app/
-# WORKDIR /app
+FROM centos:7
+COPY --from=0 /app/main /app/
+COPY --from=0 /app/.env /app/
+WORKDIR /app
 
 EXPOSE 8000
 CMD ["./main"]
