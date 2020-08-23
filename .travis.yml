@@ -6,8 +6,6 @@ services:
 before_install:
   - docker build -f ./blog_frontend/Dockerfile.prod -t zoomiraja/blogfrontend ./blog_frontend/
   - docker build -f ./blog_api/Dockerfile.prod -t zoomiraja/goblog ./blog_api/
-
-after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u  "$DOCKER_ID" --password-stdin
   - docker push zoomiraja/blogfrontend
   - docker push zoomiraja/goblog
