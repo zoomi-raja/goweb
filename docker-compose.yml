@@ -4,6 +4,8 @@ services:
     image: blog_api
     container_name: blog_api
     build: ./blog_api
+    depends_on:
+      - db
     ports:
       - 80:8000
     volumes:
