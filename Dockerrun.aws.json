@@ -4,12 +4,12 @@
 		{
 			"name": "blog_api",
 			"links": ["go_db"],
-			"image": "zoomiraja/goblog",
+			"image": "zoomiraja/goblog:latest",
 			"essential": false,
 			"portMappings": [
 				{
-					"containerPort": 8000,
-					"hostPort": 8010
+					"hostPort": 8010,
+					"containerPort": 8000
 				}
 			],
 			"environment": [
@@ -39,12 +39,12 @@
 		{
 			"name": "blog_frontend",
 			"links": ["blog_api"],
-			"image": "zoomiraja/blogfrontend",
-			"essential": false,
+			"image": "zoomiraja/blogfrontend:latest",
+			"essential": true,
 			"portMappings": [
 				{
-					"containerPort": 3000,
-					"hostPort": 80
+					"hostPort": 3000,
+					"containerPort": 80
 				}
 			],
 			"memory": 450
