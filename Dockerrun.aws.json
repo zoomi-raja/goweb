@@ -39,7 +39,7 @@
 		{
 			"name": "blog_frontend",
 			"links": ["blog_api"],
-			"image": "zoomiraja/zoomiraja/blogfrontend",
+			"image": "zoomiraja/blogfrontend",
 			"essential": false,
 			"portMappings": [
 				{
