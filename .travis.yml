@@ -1,15 +1,19 @@
-sudo: required
-
 language: go
 
 go:
   - 1.14.x
 
+os:
+  - linux
+
 services:
   - docker
 
+env:
+  - GO111MODULE=on
+
 before_install:
-  - env GO111MODULE=on
+  - GO111MODULE=on
   - docker build -f ./blog_frontend/Dockerfile.prod -t zoomiraja/blogfrontend ./blog_frontend/
   - docker build -f ./blog_api/Dockerfile.prod -t zoomiraja/goblog ./blog_api/
 
