@@ -38,20 +38,6 @@
 			"cpu": 1
 		},
 		{
-			"name": "blog_frontend",
-			"links": ["blog_api"],
-			"image": "zoomiraja/zoomiraja/blogfrontend",
-			"essential": false,
-			"portMappings": [
-				{
-					"containerPort": 3000,
-					"hostPort": 80
-				}
-			],
-			"memory": 500,
-			"cpu": 1
-		},
-		{
 			"name": "go_db",
 			"image": "mysql:5.6",
 			"essential": true,
