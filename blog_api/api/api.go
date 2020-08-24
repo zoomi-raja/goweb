@@ -22,5 +22,5 @@ func listen(port int) {
 	origins := handlers.AllowedOrigins([]string{"*"}) //http://localhost:3001
 	log.Fatal(http.ListenAndServe(
 		fmt.Sprintf(":%d", port),
-		handlers.CORS(header, methods, origins)(http.TimeoutHandler(r, time.Second*1, "timeout"))))
+		handlers.CORS(header, methods, origins)(http.TimeoutHandler(r, time.Second*5, "timeout"))))
 }

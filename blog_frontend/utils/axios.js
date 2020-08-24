@@ -1,6 +1,10 @@
 import axios from "axios";
+console.log(process.env.NODE_ENV);
 const instance = axios.create({
-	baseURL: "http://localhost:8010/",
+	baseURL:
+		process.env.NODE_ENV !== "development"
+			? "http://webblog-env.eba-km92i85a.us-east-2.elasticbeanstalk.com/"
+			: "http://localhost:8010/",
 	headers: { "Content-Type": "application/json" },
 });
 instance.interceptors.response.use(
