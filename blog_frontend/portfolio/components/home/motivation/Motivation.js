@@ -23,8 +23,7 @@ const Motivation = () => {
 					that Vanilla JS Joke explain it all. With all this in mind i started
 					my journey with golang and so far it's been awesome golang offers to
 					do things in one way (goroutines, channels, statically typed, Cyclic
-					dependencies, Pass By Value) no need to run into Functional vs
-					Class-Components discussion as JavaScript community did to JavaScript
+					dependencies, Pass By Value).
 				</p>
 				<div className={classes.motivation_img}>
 					<img src={go} alt="go power" />

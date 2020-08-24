@@ -18,7 +18,7 @@ const Header = () => {
 					<div className={classes.infoPersonal}>
 						<p>
 							Hi,
-							<br /> I Wellcome you on my Portfolio
+							<br /> Welcome to my Portfolio
 							<br /> My name is Zamurd Ali
 						</p>
 						<span>
