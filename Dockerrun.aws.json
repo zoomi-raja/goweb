@@ -3,7 +3,6 @@
 	"containerDefinitions": [
 		{
 			"name": "blog_api",
-			"links": ["go_db"],
 			"image": "zoomiraja/goblog:latest",
 			"essential": false,
 			"portMappings": [
