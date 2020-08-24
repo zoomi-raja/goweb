@@ -59,7 +59,7 @@ export async function getServerSideProps(ctx) {
 	// Fetch data from external API
 	const { pid } = ctx.params;
 	// const post = await axios.get(`http://blog_api:8000/posts/${pid}/`);
-	post.data = {
+	let post = {
 		id: 11,
 		userId: 0,
 		claps: 0,
@@ -72,6 +72,6 @@ export async function getServerSideProps(ctx) {
 		updatedAt: "22-Aug-2020 1:24 PM",
 	};
 	// Pass data to the page via props
-	return { props: post.data };
+	return { props: { data: post } };
 }
 export default Post;
