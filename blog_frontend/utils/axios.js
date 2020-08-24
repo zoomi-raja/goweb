@@ -3,7 +3,7 @@ console.log(process.env.NODE_ENV);
 const instance = axios.create({
 	baseURL:
 		process.env.NODE_ENV !== "development"
-			? "http://webblog-env.eba-km92i85a.us-east-2.elasticbeanstalk.com:8010/"
+			? "http://webblog-env-2.eba-xuiyciqv.us-east-2.elasticbeanstalk.com/:8010/"
 			: "http://localhost:8010/",
 	headers: { "Content-Type": "application/json" },
 });
