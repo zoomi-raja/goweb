@@ -7,7 +7,11 @@ import Social from "../../social/Social";
 const Header = () => {
 	return (
 		<div className={`sub-container ${classes.sectionHeader}`}>
-			<a className={classes.downloadResume} href="/">
+			<a
+				className={classes.downloadResume}
+				href="/api/download"
+				target="_blank"
+			>
 				Resume <span>&darr;</span>
 			</a>
 			<div className={classes.header}>

@@ -3,6 +3,7 @@
 	position: absolute;
 	top: 2rem;
 	right: 2rem;
+	z-index: 1;
 	&:hover {
 		border-bottom: 1px solid var(--utiliy-ycolor);
 	}
