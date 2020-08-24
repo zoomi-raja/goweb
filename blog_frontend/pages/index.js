@@ -1,6 +1,7 @@
 import Head from "next/head";
 import App from "../portfolio/App";
 import { Fragment } from "react";
+import pic from "../portfolio/assets/zoomi.jpeg";
 
 export default function Home() {
 	return (
@@ -14,7 +15,7 @@ export default function Home() {
 					content="Portfolio website. Blog will be fully functional soon as 2020 is all about learning, struggle and moving forward but not to give up..!"
 				></meta>
 				<meta property="og:title" content="Zoomi blog" />
-				<meta property="og:image" content="/favicon.ico" />
+				<meta property="og:image" content={pic} />
 				<meta
 					property="og:description"
 					content="Portfolio website. Blog will be fully functional soon as 2020 is all about learning, struggle and moving forward but not to give up..!"
