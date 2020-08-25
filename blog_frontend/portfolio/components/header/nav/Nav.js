@@ -17,7 +17,7 @@ const Nav = () => {
 					duration={300}
 					offset={-60}
 				>
-					Intrests
+					Interests
 				</Link>
 			</li>
 			<li className="navItem">

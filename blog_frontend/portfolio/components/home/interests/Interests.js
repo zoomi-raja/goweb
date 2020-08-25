@@ -37,7 +37,7 @@ const Interests = () => {
 	return (
 		<div className="sub-container" id="interests">
 			<h1 className="text-ac mb-2">
-				<span className="text-ul">Intrests & Skills</span>
+				<span className="text-ul">Interests & Skills</span>
 			</h1>
 			<div className={classes.skills}>{html}</div>
 		</div>
