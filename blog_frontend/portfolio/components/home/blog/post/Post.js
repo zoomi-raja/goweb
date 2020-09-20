@@ -7,7 +7,9 @@ const Post = (props) => {
 	return (
 		<div className={`sub-container ${classes.post}`}>
 			<h3 className={`text-ac mb-1 ${classes.postHeader}`}>
-				<a href="/">{props.title}</a>
+				<Link href="/post/[pid]" as={`/post/${props.id}`}>
+					<a>{props.title}</a>
+				</Link>
 			</h3>
 			<p>{props.intro.substring(0, limit) + "..."}</p>
 			<div className={classes.postFooter}>

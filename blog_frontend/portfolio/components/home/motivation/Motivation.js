@@ -21,9 +21,10 @@ const Motivation = () => {
 					serve requests in parallel so node I/O may not block the requests but
 					code with sleep to particular request does blocks the server on top of
 					that Vanilla JS Joke explain it all. With all this in mind i started
-					my journey with golang and so far it's been awesome golang offers to
-					do things in one way (goroutines, channels, statically typed, Cyclic
-					dependencies, Pass By Value).
+					experimenting with golang and so far it's been awesome golang offers
+					to do things in one way (goroutines, channels,
+					statically typed, Cyclic dependencies, Pass By Value) well it can be
+					good substitute for node on server side.
 				</p>
 				<div className={classes.motivation_img}>
 					<img src={go} alt="go power" />
